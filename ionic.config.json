@@ -1,0 +1,7 @@
+{
+  "name": "CatProj",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
