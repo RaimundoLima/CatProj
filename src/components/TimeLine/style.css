@@ -1,0 +1,21 @@
+.container {
+    width:100%;
+}
+.card {
+    padding: 0px 13px 0px 13px;
+}
+    .card img {
+        width: 100% ;
+        cursor:pointer;
+    }
+.load {
+    position:absolute;
+    top:-50%;
+}
+.load h1 {
+    text-align:center
+}
+
+.load2 h1 {
+    text-align: center
+}

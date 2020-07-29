@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <access origin="*" />
+  
+  <feature name="networkinterface">
+    <param name="android-package" value="com.albahra.plugin.networkinterface.networkinterface"/>
+  </feature>
+
+  <feature name="UID">
+    <param name="android-package" value="org.hygieiasoft.cordova.uid.UID"/>
+  </feature>
+
+  <feature name="UniqueDeviceID">
+    <param name="android-package" value="hu.dpal.phonegap.plugins.UniqueDeviceID"/>
+  </feature>
+
+  
+</widget>

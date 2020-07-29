@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\public",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\TimeLine",
+    "\\src\\pages",
+    "\\src\\pages\\Home",
+    "\\src\\pages\\Perfil",
+    "\\src\\service",
+    "\\src\\theme"
+  ],
+  "SelectedNode": "\\src\\App.tsx",
+  "PreviewInSolutionExplorer": false
+}
