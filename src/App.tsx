@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route, Switch, NavLink } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, IonPage, IonContent, IonTabs, IonTabBar, IonTabButton, IonLabel, IonGrid, IonRow, IonCol, IonNav } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, IonPage, IonContent, IonTabs, IonTabBar, IonTabButton, IonLabel, IonGrid, IonRow, IonCol, IonNav, IonRouterLink, IonImg } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 
@@ -24,10 +24,11 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './global.css';
 import { filterSharp, cameraSharp, personSharp } from 'ionicons/icons';
 import Photo from './pages/Photo';
 import Filter from './pages/Filter';
-
+import Camera from './components/Camera';
 
 
 const App: React.FC = () => (
@@ -36,39 +37,35 @@ const App: React.FC = () => (
     <IonApp>
         <IonReactRouter>
             <IonContent>
-                <IonNav>
-                    <IonTitle>
-                        aaaaaaa
-                    </IonTitle>
+                <IonRouterOutlet mode="md" animated={true} >
+                    <Route path="/home" component={Home} exact />
+                    <Route path="/filter" component={Filter} exact />
+                    <Route path="/photo" component={Photo} exact />
+                    <Route path="/perfil" component={Perfil} exact />
+                    <Redirect from="/" to="/home" />
 
-                </IonNav>
+                </IonRouterOutlet>
 
-                <IonTabs>
-                    <IonRouterOutlet mode="md" animated={true} >
-                        <Route path="/home" component={Home} exact />
-                        <Route path="/filter" component={Filter} exact />
-                        <Route path="/photo" component={Photo} exact />
-                        <Route path="/perfil" component={Perfil} exact />
-                        <Redirect from="/" to="/home" />
+                <IonHeader>
+                    <IonToolbar className="toolBar">
+                        <IonRouterLink routerLink="/home" routerDirection="forward" slot="start">
+                            <IonImg className="logo" src="/assets/icon/favicon.png" />
+                        </IonRouterLink>
+                        <IonButtons slot="end">
+                            <IonButton routerLink="filter" routerDirection="forward" slot="start">
+                                <IonIcon icon={filterSharp}></IonIcon>
+                            </IonButton>
+                            <IonButton routerLink="Photo" routerDirection="forward" slot="start">
+                                <IonIcon icon={cameraSharp}></IonIcon>
+                            </IonButton>
+                            <IonButton routerLink="Perfil" routerDirection="forward" href="/Perfil" slot="start">
+                                <IonIcon icon={personSharp}></IonIcon>
+                            </IonButton>
 
-                    </IonRouterOutlet>
+                        </IonButtons>
 
-                    <IonTabBar slot="bottom">
-                        <IonTabButton  tab="home" href="/home">
-                            <IonTitle>Logo</IonTitle>
-                        </IonTabButton>
-                        <IonTabButton  tab="filter" href="/filter">
-                            <IonIcon icon={filterSharp}></IonIcon>
-                        </IonTabButton>
-                        <IonTabButton tab="photo" href="/photo">
-                            <IonIcon icon={cameraSharp}></IonIcon>
-                        </IonTabButton>
-                        <IonTabButton tab="perfil" href="/perfil">
-                            <IonIcon icon={personSharp}></IonIcon>
-                        </IonTabButton>
-                    </IonTabBar>
-
-                </IonTabs>
+                    </IonToolbar>
+                </IonHeader>
             </IonContent>
         </IonReactRouter>
     </IonApp>

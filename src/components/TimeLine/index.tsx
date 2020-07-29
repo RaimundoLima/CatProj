@@ -86,13 +86,14 @@ class TimeLine extends Component {
 
 
         return (
-            <div id="timeline" className="container">
+            <div className="has-header" id="timeline">
 
                 {
 
                     (this.state.cats.length > 1
                         ?
                         this.state.cats.map(card => (
+
                             <div className="card" color="">
                                 <img alt="cat" onTouchEnd={() => doubleTap(card.id)} onDoubleClick={() => this.favImage(card.id)} key={card.id} src={card.url} />
                             </div>

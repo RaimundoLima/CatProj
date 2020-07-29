@@ -28,7 +28,7 @@ class Home extends Component {
     return (
             <IonPage>
 
-                <IonContent>
+                <IonContent className="has-header">
                     <IonRefresher snapback-duration="3000ms" pullFactor={1.5} slot="fixed" onIonRefresh={doRefresh}>
                         <IonRefresherContent
                             pullingIcon={refreshOutline}
