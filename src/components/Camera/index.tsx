@@ -1,7 +1,6 @@
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview/ngx';
 import React, { Component } from 'react';
 import './style.css';
-import { IonFab, IonFabButton, IonContent } from '@ionic/react';
 
 
 
@@ -16,16 +15,16 @@ class Camera extends Component {
             x: 0,
             y: 0,
             width: window.screen.width,
-            height: window.screen.height/2,
-            camera: 'back',
+            height: window.screen.height,
+            camera: 'rear',
             tapPhoto: true,
             previewDrag: true,
             toBack: true,
-            alpha: 0.5
+            alpha: 1
         }
 
         // start camera
-        var cameraPreview = new CameraPreview();
+        const cameraPreview =  new CameraPreview();
 
 
         const startCamera = () => {
@@ -47,91 +46,36 @@ class Camera extends Component {
         }
         var picture
         // take a picture
-        const takePhoto = () => {
-            cameraPreview.takePicture(pictureOpts).then((imageData) => {
-                picture = 'data:image/jpeg;base64,' + imageData;
-            }, (err) => {
-                console.log(err);
-                picture = 'assets/img/test.jpg';
-            });
-        }
+        cameraPreview.takePicture(pictureOpts).then((imageData) => {
+            picture = 'data:image/jpeg;base64,' + imageData;
+        }, (err) => {
+            console.log(err);
+            picture = 'assets/img/test.jpg';
+        });
 
         // take a snap shot
-        const takeSnap = () => {
-            cameraPreview.takeSnapshot(pictureOpts).then((imageData) => {
-                picture = 'data:image/jpeg;base64,' + imageData;
-            }, (err) => {
-                console.log(err);
-                picture = 'assets/img/test.jpg';
-            });
-        }
+        cameraPreview.takeSnapshot(pictureOpts).then((imageData) => {
+            picture = 'data:image/jpeg;base64,' + imageData;
+        }, (err) => {
+            console.log(err);
+            picture = 'assets/img/test.jpg';
+        });
 
 
         // Switch camera
-        const switchCamera = () => {
-            cameraPreview.switchCamera();
-        }
-        
+        cameraPreview.switchCamera();
+
         // set color effect to negative
         cameraPreview.setColorEffect('negative');
 
         // Stop the camera preview
-        const stopCamera = () => {
-            cameraPreview.stopCamera();
-        }
-
-        cameraPreview.onBackButton();
-
-        const con = () => {
-            console.log(cameraPreview)
-        }
+        cameraPreview.stopCamera();
 
         return (
-            <IonContent className="transparente">
             <div>
-                <IonFab vertical="top" horizontal="end" slot="fixed">
-                    <IonFabButton onClick={startCamera}>
-                        func1 - start camera
-                </IonFabButton>
-                </IonFab>
-
-
-                <IonFab vertical="bottom" horizontal="end" slot="fixed">
-                    <IonFabButton onClick={takePhoto}>
-                        func2 -takePhoto
-            </IonFabButton>
-                </IonFab>
-
-
-                <IonFab className="z" vertical="top" horizontal="start" slot="fixed">
-                    <IonFabButton onClick={takeSnap}>
-                        func3- takeSnap
-            </IonFabButton>
-                </IonFab>
-
-
-                <IonFab className="z" vertical="bottom" horizontal="start" slot="fixed">
-                        <IonFabButton onClick={con}>
-                            func6
-            </IonFabButton>
-                </IonFab>
-
-
-                <IonFab className="z" vertical="center" horizontal="start" slot="fixed">
-                        <IonFabButton onClick={stopCamera}>
-                        func5
-            </IonFabButton>
-                </IonFab>
-
-
-                <IonFab className="z" vertical="center" horizontal="end" slot="fixed">
-                        <IonFabButton onClick={con}>
-                        func6
-            </IonFabButton>
-                </IonFab>
-                </div>
-            </IonContent>
-        )
+                <span onClick={startCamera}>func 1</span>
+            </div>
+            )
     }
 }
 

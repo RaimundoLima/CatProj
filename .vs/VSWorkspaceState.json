@@ -1,15 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\public",
     "\\src",
     "\\src\\components",
-    "\\src\\components\\Camera",
     "\\src\\components\\TimeLine",
-    "\\src\\pages\\Filter",
+    "\\src\\pages",
     "\\src\\pages\\Home",
     "\\src\\pages\\Perfil",
-    "\\src\\pages\\Photo"
+    "\\src\\service",
+    "\\src\\theme"
   ],
-  "SelectedNode": "\\src\\components\\Camera\\index.tsx",
+  "SelectedNode": "\\src\\App.tsx",
   "PreviewInSolutionExplorer": false
 }
