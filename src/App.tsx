@@ -27,34 +27,21 @@ import './theme/variables.css';
 import './global.css';
 import { filterSharp, cameraSharp, personSharp } from 'ionicons/icons';
 import Photo from './pages/Photo';
-import Filter from './pages/Filter';
 import Camera from './components/Camera';
 
 
-const App: React.FC = () => (
+const App: React.FC = () => {
 
+    return (
+        <IonApp>
 
-    <IonApp>
-        <IonReactRouter>
-            <IonContent>
-                <IonRouterOutlet mode="md" animated={true} >
-                    <Route path="/home" component={Home} exact />
-                    <Route path="/filter" component={Filter} exact />
-                    <Route path="/photo" component={Photo} exact />
-                    <Route path="/perfil" component={Perfil} exact />
-                    <Redirect from="/" to="/home" />
-
-                </IonRouterOutlet>
-
+            <IonReactRouter>
                 <IonHeader>
                     <IonToolbar className="toolBar">
                         <IonRouterLink routerLink="/home" routerDirection="forward" slot="start">
                             <IonImg className="logo" src="/assets/icon/favicon.png" />
                         </IonRouterLink>
                         <IonButtons slot="end">
-                            <IonButton routerLink="filter" routerDirection="forward" slot="start">
-                                <IonIcon icon={filterSharp}></IonIcon>
-                            </IonButton>
                             <IonButton routerLink="Photo" routerDirection="forward" slot="start">
                                 <IonIcon icon={cameraSharp}></IonIcon>
                             </IonButton>
@@ -66,10 +53,21 @@ const App: React.FC = () => (
 
                     </IonToolbar>
                 </IonHeader>
-            </IonContent>
-        </IonReactRouter>
-    </IonApp>
+                <IonRouterOutlet mode="md" animated={true} >
+                    <Route path="/home" component={Home} exact />
+                    <Route path="/photo" component={Photo} exact />
+                    <Route path="/perfil" component={Perfil} exact />
+                    <Redirect from="/" to="/home" />
 
-);
+                </IonRouterOutlet>
 
+
+
+            </IonReactRouter>
+
+        </IonApp>
+
+    );
+
+}
 export default App;

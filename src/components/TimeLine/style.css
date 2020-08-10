@@ -3,6 +3,7 @@
 }
 .card {
     padding: 0px 13px 0px 13px;
+    z-index:1000;
 }
     .card img {
         width: 100% ;

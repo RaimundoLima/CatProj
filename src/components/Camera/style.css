@@ -1,0 +1,19 @@
+.cameraToolBar {
+    margin-top: auto;
+    display: inline-flex;
+    justify-content: space-between;
+    background-color: black;
+    height: 20%;
+}
+
+.cameraBtn {
+    position: relative;
+    padding: 0 5% 0 5%;
+    place-self: center;
+}
+
+.photoBtn ion-fab-button {
+    background-color: red;
+    border: 5px solid gray;
+    border-radius: 50%;
+}

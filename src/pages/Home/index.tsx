@@ -1,48 +1,42 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRefresherContent, IonRefresher, IonIcon, IonButtons, IonButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRefresherContent, IonRefresher, IonIcon, IonButtons, IonButton, IonToggle, IonLabel, IonRow, IonCol, IonSelectOption, IonSelect } from '@ionic/react';
 import { refreshOutline, time, person, personSharp, cameraSharp, filterSharp } from 'ionicons/icons';
 import { RefresherEventDetail } from '@ionic/core';
 
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './style.css';
 
 import TimeLine from '../../components/TimeLine'
+import Filters from '../../components/Filters';
 
-class Home extends Component {
-    TimeLine: React.RefObject<TimeLine>;
+const Home: React.FC = () => {
 
-    constructor(props:any) {
-        super(props);
-        this.TimeLine=React.createRef()
+    const [refresh, setRefresh] = useState(Date.now)
+    const doRefresh = (event: CustomEvent<RefresherEventDetail>) => {
+        console.log('Reload TimeLine');
+        setTimeout(() => {
+            setRefresh(Date.now)
+            event.detail.complete();
+        }, 1000);
     }
 
-   
-    render() {
-        const doRefresh = (event: CustomEvent<RefresherEventDetail>) => {
-            console.log('Begin async operation');
-
-            setTimeout(() => {
-                console.log(this.TimeLine.current?.reload())
-                event.detail.complete();
-            }, 1000);
-        }
     return (
-            <IonPage>
+        <IonPage className="has-header" >
+            <Filters/>
+            <IonContent  >
+                <IonRefresher className="refresh" snapback-duration="3000ms" pullFactor={1.5} slot="fixed" onIonRefresh={doRefresh}>
+                    <IonRefresherContent
 
-                <IonContent className="has-header">
-                    <IonRefresher snapback-duration="3000ms" pullFactor={1.5} slot="fixed" onIonRefresh={doRefresh}>
-                        <IonRefresherContent
-                            pullingIcon={refreshOutline}
-                            refreshingSpinner="crescent"
-                        >
-                        </IonRefresherContent>
-                    </IonRefresher>
+                        pullingIcon={refreshOutline}
+                        refreshingSpinner="crescent"
+                    >
+                    </IonRefresherContent>
+                </IonRefresher>
 
-                <TimeLine ref={this.TimeLine} />
+                <TimeLine key={refresh} />
 
-                </IonContent>
-            </IonPage>
+            </IonContent>
+        </IonPage >
     );
-    }
 };
 
 export default Home;

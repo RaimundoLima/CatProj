@@ -1,0 +1,21 @@
+.popBody {
+    height: 188px
+}
+
+.load {
+    transform: scale(3)
+}
+
+.popContent {
+    padding: 20px;
+    text-align: center;
+}
+
+ion-spinner {
+    width: 100px;
+    height: 100px;
+}
+
+.popText {
+    margin:36PX 0 36px 0
+}
