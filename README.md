@@ -1,4 +1,4 @@
-# AnimeHub
+# CatProj
 _ultima atualização 12/08/2020_
 Projeto de estudo feito utilizando Ionic, Reactjs, Capactitor e consumindo a api do https://thecatapi.com/.
 
