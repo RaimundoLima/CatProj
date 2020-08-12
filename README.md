@@ -7,4 +7,6 @@ Projeto criado com intenção de estudar um app hibrido utilizando o sistema de 
 
 App se baseai em 3 telas uma timeline com filtros, uma tela onde se pode enviar fotos para o servidor utilizando a camera ou selecionando um arquivo, a api só salva imagens de gatos, e uma tela onde se pode ver quais imagens foram enviadas e salvas pela api(o identificador unico do usuario é o ip da rede wifi que ele esta conectado escolha do ip da rede unicamente por teste).
 
+Download do app:
+
 ![qrCode.png](qrCode.png)
