@@ -9,7 +9,14 @@ import { NetworkInterface } from '@ionic-native/network-interface/ngx';
 import VizSensor from 'react-visibility-sensor';
 
 
-const TimeLine: React.FC = () => {
+const TimeLine: React.FC<{
+    filters: {
+        breed: string,
+        category: string,
+        type: string
+    },
+    perfil: boolean
+}> = (props) => {
 
     const [cats, setCats] = useState([{
         id: "",
@@ -19,13 +26,18 @@ const TimeLine: React.FC = () => {
 
     useEffect(() => {
         loadCats();
-    },[])
+    }, [])
 
 
     const loadCats = async () => {
         const api = new CatApi();
-
-        setCats(await api.ListImages());
+        if (props.perfil) {
+            const ip = await getIp()
+            setCats(await api.ListMyImages(ip));
+        } else
+        {
+            setCats(await api.ListImages(props.filters));
+        }
         console.log(cats)
     }
 
@@ -36,17 +48,31 @@ const TimeLine: React.FC = () => {
 
     const appendCats = async () => {
         const api = new CatApi();
-        setCats([...cats,... await api.ListImages()]);
+
+        if (props.perfil) {
+            const ip= await getIp()
+            setCats([...cats, ... await api.ListMyImages(ip)]);
+        } else {
+            setCats([...cats, ... await api.ListImages(props.filters)]);
+        }
+
+
         console.log(cats)
     }
 
     const favImage = async (catID: string) => {
         const api = new CatApi();
 
+        const ip =await  getIp()
+
+        api.FavImage(catID, `User-${ip}`)//xklm1
+    }
+
+    const getIp = async () => {
         const networkInterface = new NetworkInterface()
-        networkInterface.getWiFiIPAddress()
-            .then(address => api.FavImage(catID, `User-${address.ip}`))//xklm1
-            .catch(error => console.error(`Unable to get IP: ${error}`))
+        const adress = await networkInterface.getWiFiIPAddress()
+        console.log(`IP : ${adress.ip} `)
+        return adress.ip
     }
 
     let timeOut: NodeJS.Timeout | null = null;
@@ -97,7 +123,7 @@ const TimeLine: React.FC = () => {
                 )
 
             }
-            {(cats.length != 1 && cats[0].id != null
+            {(cats.length != 1 
                 ?
                 <VizSensor onChange={visibleChange}>
                     <IonInfiniteScroll threshold="100px" >

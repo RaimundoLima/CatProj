@@ -6,7 +6,7 @@ import CatApi from '../../service/CatApi';
 
 
 
-const Filters: React.FC = () => {
+const Filters: React.FC<{ setter: Function }> = (props) => {
 
 	const [categorys, setCategorys] = useState([{
 		id: "",
@@ -35,6 +35,21 @@ const Filters: React.FC = () => {
 		setFilterOpen(!filterOpen)
 	}
 
+
+	const[filterCategory,setFilterCategory]=useState("")
+	const[filterBreed,setFilterBreed]=useState("")
+	const[filterType,setFilterType]=useState("")
+
+	const updateFilters = () => {
+		props.setter({
+			category: filterCategory,
+			breed: filterBreed,
+			type: filterType
+		})
+		setFilterOpen(!filterOpen)
+	}
+
+	
 	return (
 		<div className={"filterBody "+ 
                                 (filterOpen
@@ -45,16 +60,16 @@ const Filters: React.FC = () => {
 
 				<IonCol>
 					<IonLabel>Type</IonLabel>
-					<IonSelect className="select" value=""  >
+					<IonSelect onIonChange={(e) => { setFilterType(e.detail.value) }} className="select" value={filterType}  >
 						<IonSelectOption value="">All</IonSelectOption>
 						<IonSelectOption value="gif">Animate</IonSelectOption>
-						<IonSelectOption value="[jpg,png,jpeg]">Static</IonSelectOption>
+						<IonSelectOption value="jpg,png,jpeg">Static</IonSelectOption>
 					</IonSelect>
 
 				</IonCol>
 				<IonCol>
 					<IonLabel>Category</IonLabel>
-					<IonSelect className="select" value="" >
+					<IonSelect onIonChange={(e) => { setFilterCategory(e.detail.value) }} className="select" value={filterCategory} >
 						<IonSelectOption value="">All</IonSelectOption>
 						{categorys.map(category => (
 							<IonSelectOption value={category.id}>{category.name}</IonSelectOption>
@@ -67,7 +82,7 @@ const Filters: React.FC = () => {
 
 				<IonCol>
 					<IonLabel>Bread</IonLabel>
-					<IonSelect className="select" value="" >
+					<IonSelect onIonChange={(e) => { setFilterBreed(e.detail.value) }} className="select" value={filterBreed} >
 						<IonSelectOption value="">All</IonSelectOption>
 						{breeds.map(breeds => (
 							<IonSelectOption value={breeds.id}>{breeds.name}</IonSelectOption>
@@ -76,7 +91,8 @@ const Filters: React.FC = () => {
 
 				</IonCol>
 			</IonRow>
-			<IonButton expand="full">Update filters</IonButton>
+			<IonButton onClick={updateFilters} expand="full">Update filters</IonButton>
+
 			<div onClick={changeFilter} className="filterIcon">
 				<div>
 					<IonIcon icon={filterSharp}></IonIcon>

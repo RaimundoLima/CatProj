@@ -71,15 +71,21 @@ const Photo: React.FC = () => {
         setCamera(!cameraOn);
     }
 
+    const getIp = async () => {
+        const networkInterface = new NetworkInterface()
+        const adress = await networkInterface.getWiFiIPAddress()
+        console.log(`IP : ${adress.ip} `)
+        return adress.ip
+    }
+
     const sendImage = async (img: File) => {
 
         setShowPopover(true)
         const api = new CatApi();
 
-        const networkInterface = new NetworkInterface()
-        const adress = await networkInterface.getWiFiIPAddress()
+        const ip=await getIp()
 
-        setPopOverRequest(api.SendImage(img, `User-${1}`))//xklm1
+        setPopOverRequest(api.SendImage(img, ip))//xklm1
 
     }
     const [popOverRequest, setPopOverRequest] = useState(new Promise(() => { }))
@@ -102,10 +108,9 @@ const Photo: React.FC = () => {
                         >
                             <PopOver promise={popOverRequest} />
                         </IonPopover>
-                        <IonButton onClick={() => setShowPopover(true)}>Show Popover</IonButton>
                         <IonText >
                             <h3 className="paddingText">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur
+                                Só são enviadas pro servidor fotos de gato e nos jpg,jpeg,png ou gif  TheCatApi
                             </h3>
                         </IonText>
                         <IonButton onClick={changeCamera} className="marginButton" color="primary" expand="block" size="large" fill="solid" shape="round">

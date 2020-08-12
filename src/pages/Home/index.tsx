@@ -2,7 +2,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRefresherConte
 import { refreshOutline, time, person, personSharp, cameraSharp, filterSharp } from 'ionicons/icons';
 import { RefresherEventDetail } from '@ionic/core';
 
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import './style.css';
 
 import TimeLine from '../../components/TimeLine'
@@ -11,6 +11,7 @@ import Filters from '../../components/Filters';
 const Home: React.FC = () => {
 
     const [refresh, setRefresh] = useState(Date.now)
+
     const doRefresh = (event: CustomEvent<RefresherEventDetail>) => {
         console.log('Reload TimeLine');
         setTimeout(() => {
@@ -19,9 +20,19 @@ const Home: React.FC = () => {
         }, 1000);
     }
 
+    const [filters, setFilters] = useState({
+        breed:"",
+        category:"",
+        type:""
+    })
+
+    useEffect(() => {
+        setRefresh(Date.now)
+    },[filters])
+
     return (
         <IonPage className="has-header" >
-            <Filters/>
+            <Filters setter={setFilters}/>
             <IonContent  >
                 <IonRefresher className="refresh" snapback-duration="3000ms" pullFactor={1.5} slot="fixed" onIonRefresh={doRefresh}>
                     <IonRefresherContent
@@ -32,7 +43,7 @@ const Home: React.FC = () => {
                     </IonRefresherContent>
                 </IonRefresher>
 
-                <TimeLine key={refresh} />
+                <TimeLine key={refresh} filters={filters} perfil={false} />
 
             </IonContent>
         </IonPage >

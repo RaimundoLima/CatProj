@@ -19,13 +19,31 @@ const api = Axios.create(config)
 class CatApi {
 
 
-	ListImages =  async (filters = {limit:0,size:""}) =>
+	ListImages = async (filters = {breed: "",category: "",type: ""}) =>
 	{
-		filters.limit = 8;
-		filters.size="med"
-		const result = await api.get('/images/search', {params:filters})
+		const params = {
+			breed_id: filters.breed,
+			category_ids: filters.category,
+			mime_types: filters.type,
+			limit: 8,
+			size: "med"
+		}
+		console.log(params)
+		const result = await api.get('/images/search', {params:params})
 		return result.data;
 
+	}
+
+	ListMyImages = async (sub_id: string) => {
+		console.log(`sub id : ${sub_id}`)
+		const params = {
+			sub_id: sub_id,
+			limit:8
+		}
+		const result = await api.get('/images/', { params: params })
+		console.log(`result ${result}`)
+		console.log(`data ${result.data}`)
+		return result.data;
 	}
 
 	ListBreeds = async () => {
@@ -36,12 +54,6 @@ class CatApi {
 	ListCategory = async () => {
 		const result = await api.get("/categories")
 		return result.data
-	}
-
-	ListMyImages = async () =>
-	{
-		api.get('')
-		return "d"
 	}
 
 
